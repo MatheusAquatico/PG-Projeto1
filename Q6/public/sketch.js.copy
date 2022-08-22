@@ -1,0 +1,133 @@
+
+
+
+function setup() {
+  createCanvas(windowWidth - 15, windowHeight - 20, WEBGL);
+  frameRate(60)
+  
+  
+}
+
+function draw() {
+    const v =1
+    const r=100
+    const t = millis()/1000;
+    background('white');
+    line(-300,0,0,600,0,0);
+    line(150,-450,0,150,450,0);
+    line(150,0,-300,150,0,450);
+    
+    const theta= PI/3;
+    const theta2= PI/2;
+    //rotateX(theta);
+    push();
+    applyMatrix(
+        1, 0, 0, 0,
+        0, cos(theta), sin(theta), 0,
+        0, -sin(theta), cos(theta), 0,
+        0, 0, 0, 1
+    );
+    circle(250, -100, 200);
+    point(250, -100);
+    
+    square(150, -200, 200);
+    
+    //rotateX(theta);
+    
+
+    
+
+   
+    pop();
+    
+    
+    
+    push();
+    
+    
+    //faz rodar na inclinação certa
+    
+    
+    applyMatrix(
+        1, 0, 0, 0,
+        0, cos(theta), sin(theta), 0,
+        0, -sin(theta), cos(theta), 0,
+        0, 0, 0, 1
+    );
+    
+   
+    //faz rodar no eixo certo
+
+    applyMatrix(
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        250, -100, 0, 1
+    );
+    
+    //faz rodar a rodinha na rodona
+    applyMatrix(
+        cos(v*t), -sin(v*t), 0, 0,
+        sin(v*t), cos(v*t), 0, 0,
+        0, 0, 1.5, 0,
+        0, 0, 0, 1.5
+    );
+    
+    
+    //levanta a rodinha (n precisa)
+    
+   /* applyMatrix(
+        1, 0, 0, 0,
+        0, cos(theta2), sin(theta2), 0,
+        0, -sin(theta2), cos(theta2), 0,
+        0, 0, 0, 1
+    );
+    */
+    //faz a rodinha rodar no caminho
+    
+    applyMatrix(
+        1, 0, 0, 0,
+        0, cos(v*t), sin(v*t), 0,
+        0, -sin(v*t), cos(v*t), 0,
+        0, 0, 0, 1
+    );
+        //translation
+    applyMatrix(
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        150, -137.5, 0, 1
+    );
+    
+    //rotateY(theta2);
+
+    applyMatrix(
+        cos(theta2), 0, -sin(theta2), 0,
+        0, 1, 0, 0,
+        sin(theta2), 0, cos(theta2), 0,
+        0, 0, 0, 1
+    );
+    
+    //rotateZ(theta2);
+
+    applyMatrix(
+        cos(theta2), sin(theta2), 0, 0,
+        -sin(theta2), cos(theta2), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    );
+    
+   
+    
+    
+    circle(150,12.5, 25);
+    strokeWeight(3);//tamanho do contorno
+    stroke(255,0,0);
+    point(150,25)
+    pop();
+    
+    orbitControl();
+    
+    
+    
+}
